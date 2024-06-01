@@ -1,4 +1,3 @@
-import { Link } from "expo-router";
 import { Image, ScrollView, Text, View, StatusBar } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -49,7 +48,6 @@ export default function App() {
             containerStyle="w-full mt-7"
           />
 
-          <Link href="(auth)">auth</Link>
         </View>
       </ScrollView>
 

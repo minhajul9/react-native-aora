@@ -4,6 +4,8 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 const AuthLayout = () => {
+
+  // bundleID: com.minhaj.aora
   return (
     <>
       <Stack>

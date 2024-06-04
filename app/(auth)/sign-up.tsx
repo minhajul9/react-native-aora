@@ -1,24 +1,42 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from '../../constants'
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
-import { Link } from "expo-router";
-import {createUser} from '../../lib/appwrite'
+import { Link, router } from "expo-router";
+import { createUser } from '../../lib/appwrite'
 
 const SignUp = () => {
 
   const [form, setForm] = useState({
     username: '',
-    fullname: '',
+    // fullname: '',
     email: '',
     password: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const submitForm = () => { 
-    createUser();
+  const submitForm = async () => {
+
+    if (!form.email || !form.password || !form.password) {
+      Alert.alert('Error', "Please, fill all the fields.");
+    }
+    else {
+      setIsSubmitting(true);
+
+      try {
+        alert("email: " + form.email +"  password: "+ form.password+"  username: " + form.username);
+        // const result = await createUser(form.email, form.password, form.username);
+
+        router.replace('/home')
+      } catch (error) {
+        Alert.alert("Error", error.message)
+      }
+      finally {
+        setIsSubmitting(false);
+      }
+    }
   }
 
   return (
@@ -34,13 +52,14 @@ const SignUp = () => {
 
           <Text className="text-white text-2xl font-psemibold mt-10">Sign Up to Aora</Text>
 
-          <FormField
+          {/* <FormField
             title="Fullname"
             value={form.fullname}
             handleTextChange={(e: string) => setForm({ ...form, fullname: e })}
             placeholder='Enter your Full Name'
             otherStyle="mt-10"
-          />
+          /> */}
+
           <FormField
             title="Username"
             value={form.username}
@@ -67,7 +86,7 @@ const SignUp = () => {
 
 
           <CustomButton
-            title='Sign In'
+            title='Sign Up'
             containerStyle='mt-7'
             handlePress={submitForm}
             isLoading={isSubmitting}

@@ -8,6 +8,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
   <img src="./ss/page1.jpg" style="margin: 10px;" width="31%" />
   <img src="./ss/sign in.jpg" style="margin: 10px;" width="31%" />
   <img src="./ss/sign up.jpg" style="margin: 10px;" width="31%" />
+  <img src="./ss/home.jpg" style="margin: 10px;" width="31%" />
+  <img src="./ss/trending.jpg" style="margin: 10px;" width="31%" />
   
 </p>
 

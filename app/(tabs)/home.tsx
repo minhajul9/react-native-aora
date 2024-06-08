@@ -5,13 +5,14 @@ import { images } from '../../constants';
 import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
-import { getAllPosts } from "@/lib/appwrite";
+import { getAllLatestPosts, getAllPosts } from "@/lib/appwrite";
 import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from "@/components/VideoCard";
 
 const Home = () => {
 
   const { data: posts, reFetch } = useAppwrite(getAllPosts);
+  const { data: latests } = useAppwrite(getAllLatestPosts);
 
 
   const [refreshing, setRefreshing] = useState(false);
@@ -28,7 +29,7 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts}
+        data={posts ?? []}
         // data={[]}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
@@ -68,7 +69,7 @@ const Home = () => {
               </Text>
 
               <Trending
-                posts={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }] ?? []}
+                posts={latests ?? []}
               />
 
             </View>

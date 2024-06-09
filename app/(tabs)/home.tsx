@@ -72,6 +72,7 @@ const Home = () => {
                 posts={latests ?? []}
               />
 
+
             </View>
 
           </View>

@@ -44,9 +44,8 @@ const TrendingItem = ({ activeItem, item }) => {
                     resizeMode={ResizeMode.CONTAIN}
                     useNativeControls
                     shouldPlay
-                    onError={(error) => alert(error)}
+                    onError={(error) => alert("Problem loading video.")}
                     onPlaybackStatusUpdate={(status) => {
-                        console.log(status);
                         if (status.didJustFinish) {
                             setPlay(false);
                         }

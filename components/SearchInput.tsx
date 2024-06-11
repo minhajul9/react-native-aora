@@ -1,9 +1,13 @@
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { icons } from '../constants'
+import { router, usePathname } from 'expo-router'
 // import {  } from 'react-native-gesture-handler'
 
-const SearchInput = ({ title, value, handleTextChange, placeholder, otherStyle, keyboardType, ...props }) => {
+const SearchInput = ({ title, value, placeholder, otherStyle, keyboardType, ...props }) => {
+
+    const pathname = usePathname();
+    const [query, setQuery] = useState('')
 
 
     return (
@@ -15,13 +19,22 @@ const SearchInput = ({ title, value, handleTextChange, placeholder, otherStyle, 
                     placeholder='Search for a video topic'
                     value={value}
                     className='flex-1 text-white font-psemibold '
-                    placeholderTextColor='#7b7b8b'
-                    onChangeText={handleTextChange}
+                    placeholderTextColor='#CDCDE0'
+                    onChangeText={(e) => setQuery(e)}
                 />
 
 
                 <TouchableOpacity
-                    // onPress={() => setShowPassword(!showPassword)}
+                    onPress={() => {
+                        if (!query) {
+                            Alert.alert("Missing query", "Please input something for search.")
+                        }
+
+                        if (pathname.startsWith('/search')) router.setParams({ query })
+                        else {
+                    router.push(`/search/${query}`)
+                        }
+                    }}
                 >
                     <Image
                         source={icons.search}

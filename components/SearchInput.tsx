@@ -4,20 +4,19 @@ import { icons } from '../constants'
 import { router, usePathname } from 'expo-router'
 // import {  } from 'react-native-gesture-handler'
 
-const SearchInput = ({ title, value, placeholder, otherStyle, keyboardType, ...props }) => {
+const SearchInput = ({  initialQuery }) => {
 
     const pathname = usePathname();
-    const [query, setQuery] = useState('')
+    const [query, setQuery] = useState(initialQuery)
 
 
     return (
-        <View className={`space-y-2 ${otherStyle}`}>
-            <Text className='text-gray-200 text-base font-pmedium'>{title}</Text>
+        <View className={`space-y-2 mt-4`}>
 
             <View className='w-full h-16 p-4 bg-black-200 border border-gray-500 rounded-lg focus:border-secondary-100 flex-row items-center'>
                 <TextInput
                     placeholder='Search for a video topic'
-                    value={value}
+                    value={query}
                     className='flex-1 text-white font-psemibold '
                     placeholderTextColor='#CDCDE0'
                     onChangeText={(e) => setQuery(e)}
@@ -31,8 +30,9 @@ const SearchInput = ({ title, value, placeholder, otherStyle, keyboardType, ...p
                         }
 
                         if (pathname.startsWith('/search')) router.setParams({ query })
+
                         else {
-                    router.push(`/search/${query}`)
+                            router.push(`/search/${query}`)
                         }
                     }}
                 >
